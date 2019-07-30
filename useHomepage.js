@@ -1,25 +1,27 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 
 import {Link, Router} from "@reach/router"
 
-const useHomepage = (props)=>
+const useHomepage = ()=>
 {
-const [count, setCount] = useState(props);    
+    const [count, setCount] = useState(0);    
 
 function handleAddItems(){
     setCount(count + 1);
 }
 
+
 const HomePage=()=>{return (
+
 <div id="shopping">
         <div id="navBar">
-            <Link to="/">
-                home
-            </Link>
+              <h2>  home</h2>
 
+        <div>
             <Link to="/Cart">
-                cart
+                cart({count})
             </Link>
+            </div>
 
             <button onClick={handleAddItems}>
         add items
@@ -29,6 +31,6 @@ const HomePage=()=>{return (
             </h1>
 </div>  )
 }
-return [count, HomePage]
+return [count,setCount, HomePage]
 }
 export default useHomepage;

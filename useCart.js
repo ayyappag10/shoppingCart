@@ -2,16 +2,10 @@ import React,{useState, useEffect} from "react"
 // import {render} from "react-dom"
 import {Link} from "@reach/router"
 
-const useCart = (props)=>
+const useCart = ()=>
 {
-  const [count, setCount] = useState(props)
-
-  useEffect(
-    
-    ()=>setCount(props)
-    ,
-    [props]
-  )
+  
+  const [count, setCount] = useState(0)
 
   function handleRemoveItems(){
     if(count)
@@ -19,14 +13,14 @@ const useCart = (props)=>
       setCount(count - 1);
     }
   }
-
-  console.log(props)
     const Cart =  ()=>(
     <div id="cart">
-        cart items
+        <h2>cart items</h2>
+        <div>
         <Link to="/">
             home
         </Link>
+        </div>
         <button
         onClick= {handleRemoveItems}
         >
@@ -36,7 +30,7 @@ const useCart = (props)=>
       
 </div>  
   )
-  return [Cart]
+  return [count,setCount,Cart]
 
 }
 

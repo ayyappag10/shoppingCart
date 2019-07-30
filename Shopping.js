@@ -1,4 +1,4 @@
-import React,{useState} from "react"
+import React,{useState,useEffect} from "react"
 import {render} from "react-dom"
 
 import {Link, Router} from "@reach/router"
@@ -7,13 +7,25 @@ import useCart from "./useCart";
 
 const Shopping = ()=>
 {
-  const [noOfCartItems,HomePage] = useHomePage(0)
-  const [CartDude] = useCart(noOfCartItems);
+  // const [parentCount, setParentCount] = useState(0)
+  const [homePageItemCount,setHomePageCount,HomePage] = useHomePage()
 
-  console.log("reneder", noOfCartItems)
-    return(
+  const [cartItemCount,setCartItemCount,CartDude] = useCart();
+
+  useEffect(
+    ()=>{setHomePageCount(cartItemCount)},
+    [cartItemCount]
+  )
+
+  useEffect(
+    ()=>{setCartItemCount(homePageItemCount)},
+    [homePageItemCount]
+  )
+
+  
+  return(
         
-<div id="shopping">
+  <div id="shopping">
     <Router>
         <HomePage path = "/"/>
         <CartDude path = "/Cart"/>
